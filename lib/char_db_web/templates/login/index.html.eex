@@ -1,0 +1,18 @@
+<%= render_message(@message) %>
+
+
+<%= if @logged_in do %>
+"INLOGGAD!!!"
+<% else %>
+
+
+    <form id="log_in" method="POST" action="/login">
+        <label for="username">Enter your username:</label>
+        <input type=text name="username" id="username" required>
+        <label for="password">Enter your password:</label>
+        <input type=password name="password" id="password" required>
+        <input type="submit">
+    </form>
+
+No account?  <a href="/create">Create one here</a>
+<% end %>

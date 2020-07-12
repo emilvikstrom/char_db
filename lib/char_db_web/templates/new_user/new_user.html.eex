@@ -1,0 +1,9 @@
+<form id="new_user" method="POST" action="/new">
+    <label for="username">Enter your username:</label>
+    <input type=text name="username" id="username" required>
+    <label for="password">Enter your password:</label>
+    <input type=password name="password" id="password" required>
+    <label for="confirm_password">Enter your password again: </label>
+    <input type=password name="confirm_password" id="confirm_password" required>
+    <input type="submit">
+</form>

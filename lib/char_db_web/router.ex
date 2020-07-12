@@ -27,6 +27,7 @@ defmodule CharDbWeb.Router do
   scope "/new", CharDbWeb do
     pipe_through :browser
     get "/", NewUserController, :get
+    post "/", NewUserController, :create
   end
 
   # Other scopes may use custom stacks.

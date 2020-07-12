@@ -14,5 +14,9 @@ config :char_db, CharDbWeb.Endpoint,
   http: [port: 4002],
   server: false
 
+config :char_db,
+  user: UserMock,
+  token: TokenMock
+
 # Print only warnings and errors during test
 config :logger, level: :warn

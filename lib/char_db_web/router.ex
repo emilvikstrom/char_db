@@ -5,9 +5,12 @@ defmodule CharDbWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
-    plug CharDbWeb.AuthenticatePlug
     # plug :protect_from_forgery
     # plug :put_secure_browser_headers
+  end
+
+  pipeline :authentication do
+    plug CharDbWeb.AuthenticatePlug
   end
 
   pipeline :api do
@@ -15,10 +18,15 @@ defmodule CharDbWeb.Router do
   end
 
   scope "/", CharDbWeb do
-    pipe_through :browser
-    get "/", PageController, :index
+    pipe_through [:browser, :authentication]
+    get "/", LoginController, :index
     get "/login", LoginController, :index
     post "/login", LoginController, :login
+  end
+
+  scope "/new", CharDbWeb do
+    pipe_through :browser
+    get "/", NewUserController, :get
   end
 
   # Other scopes may use custom stacks.

@@ -7,8 +7,8 @@ defmodule CharDbWeb.LoginController do
     render(conn, "index.html", logged_in: is_logged_in, message: "")
   end
 
-  def login(conn, %{"username" => username, "password" => password}) do
-    if authenticate(username, password) do
+  def login(conn, params) do
+    if authenticate(params) do
       html(
         conn,
         """
@@ -28,6 +28,8 @@ defmodule CharDbWeb.LoginController do
   end
 
   defp generate_token(), do: "super-secret-token"
-  defp authenticate("username", "password"), do: true
-  defp authenticate(_username, _password), do: false
+
+  defp authenticate(params), do: user().exists?(params)
+
+  defp user(), do: Application.get_env(:char_db, :user, CharDb.User)
 end

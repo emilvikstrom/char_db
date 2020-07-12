@@ -6,8 +6,6 @@ defmodule CharDbWeb.LoginView do
   def render_message(""), do: ""
 
   def render_message(message) do
-    IO.inspect(message, label: :render_message)
-
     """
       Fel credentials
     """

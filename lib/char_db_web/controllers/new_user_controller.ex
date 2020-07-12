@@ -27,5 +27,5 @@ defmodule CharDbWeb.NewUserController do
     user().create(params)
   end
 
-  defp user, do: Application.get_env(:char_db, :user, CharDb.User)
+  defp user, do: Application.get_env(:char_db, :user, CharDb.Users)
 end

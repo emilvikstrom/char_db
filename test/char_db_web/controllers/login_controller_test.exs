@@ -37,8 +37,8 @@ defmodule CharDbWeb.LoginControllerTest do
   describe "POST /login" do
     test "POST /login", %{conn: conn} do
       UserMock
-      |> expect(:exists?, fn %{"password" => "password", "username" => "username"} ->
-        true
+      |> expect(:read, fn %{"password" => "password", "username" => "username"} ->
+        %CharDb.Users{}
       end)
 
       conn = post(conn, "/login", %{"username" => "username", "password" => "password"})

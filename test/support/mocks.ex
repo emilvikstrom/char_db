@@ -1,2 +1,2 @@
-Mox.defmock(UserMock, for: CharDb.User)
+Mox.defmock(UserMock, for: CharDb.Users)
 Mox.defmock(TokenMock, for: CharDb.Token)

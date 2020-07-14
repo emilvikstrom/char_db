@@ -14,5 +14,5 @@
         <input type="submit">
     </form>
 
-No account?  <a href="/create">Create one here</a>
+No account?  <a href="/new">Create one here</a>
 <% end %>

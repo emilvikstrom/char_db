@@ -1,6 +1,8 @@
 defmodule CharDb.Token do
   use Joken.Config
 
+  @callback verify_and_validate(String.t()) :: {:ok, String.t()} | {:error, :signature_error}
+
   @callback valid?(String.t()) :: boolean()
   def valid?(_token), do: true
 
@@ -24,7 +26,7 @@ defmodule CharDb.Token do
     }
 
     exp = %Joken.Claim{
-      generate: fn -> unix_time() + 2 * 60 * 60 end,
+      generate: fn -> unix_time() + expire_time() end,
       validate: fn val, _claims, _context -> val > unix_time() end
     }
 
@@ -44,6 +46,8 @@ defmodule CharDb.Token do
   defp validate_session(claim_val, _claims, _context) do
     claim_val == 1
   end
+
+  defp expire_time(), do: Application.get_env(:char_db, :token_expire_time, 30)
 
   defp unix_time(), do: DateTime.utc_now() |> DateTime.to_unix()
 end

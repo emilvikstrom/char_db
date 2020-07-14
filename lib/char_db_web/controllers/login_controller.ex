@@ -9,14 +9,14 @@ defmodule CharDbWeb.LoginController do
 
   def login(conn, params) do
     case authenticate(params) do
-      {:ok, _session} ->
+      %CharDb.Users{} = user ->
         html(
           conn,
           """
             <html>
               <body>
                 <script>
-                  document.cookie = "sessionToken=#{generate_token()};"
+                  document.cookie = "sessionToken=#{generate_token(user)};"
                   window.location.replace("/login");
                 </script>
               </body>
@@ -29,7 +29,7 @@ defmodule CharDbWeb.LoginController do
     end
   end
 
-  defp generate_token(), do: "super-secret-token"
+  defp generate_token(user), do: CharDb.Token.create(user)
 
   defp authenticate(params) do
     users().read(params)

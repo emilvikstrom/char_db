@@ -20,3 +20,5 @@ config :char_db,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :joken, default_signer: "testsign"

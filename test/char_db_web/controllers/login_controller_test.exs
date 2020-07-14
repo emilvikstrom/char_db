@@ -11,7 +11,7 @@ defmodule CharDbWeb.LoginControllerTest do
 
     test "with token", %{conn: conn} do
       TokenMock
-      |> expect(:valid?, fn "super-secret-token" -> true end)
+      |> expect(:verify_and_validate, fn "super-secret-token" -> {:ok, "not_used"} end)
 
       conn =
         conn
@@ -23,7 +23,7 @@ defmodule CharDbWeb.LoginControllerTest do
 
     test "with invalid token", %{conn: conn} do
       TokenMock
-      |> expect(:valid?, fn "super-secret-token" -> false end)
+      |> expect(:verify_and_validate, fn "super-secret-token" -> {:error, :signature_error} end)
 
       conn =
         conn

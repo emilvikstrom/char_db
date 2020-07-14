@@ -8,7 +8,9 @@
 use Mix.Config
 
 config :char_db,
-  ecto_repos: [CharDb.Repo]
+  ecto_repos: [CharDb.Repo],
+  # 2 Hours
+  token_expire_time: 2 * 60 * 60
 
 # Configures the endpoint
 config :char_db, CharDbWeb.Endpoint,

@@ -49,4 +49,8 @@ defmodule CharDb.Users do
 
     Repo.get_by(__MODULE__, credentials)
   end
+
+  def read(uid) do
+    Repo.get_by(__MODULE__, %{id: uid})
+  end
 end

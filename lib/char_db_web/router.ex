@@ -13,6 +13,10 @@ defmodule CharDbWeb.Router do
     plug CharDbWeb.AuthenticatePlug
   end
 
+  pipeline :get_user do
+    plug CharDbWeb.GetUserPlug
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -28,6 +32,12 @@ defmodule CharDbWeb.Router do
     pipe_through :browser
     get "/", NewUserController, :get
     post "/", NewUserController, :create
+  end
+
+  scope "/users", CharDbWeb do
+    pipe_through [:browser, :authentication, :get_user]
+
+    get "/", UserController, :get
   end
 
   # Other scopes may use custom stacks.

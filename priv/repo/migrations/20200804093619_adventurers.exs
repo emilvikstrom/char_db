@@ -4,9 +4,9 @@ defmodule CharDb.Repo.Migrations.Adventurers do
   def change do
     create table(:adventurers) do
       add :name, :string
-      add :runes, :integer
-      add :attributes, :integer
-      add :skills, :integer
+      add :runes, :map
+      add :attributes, :map
+      add :skills, :map
       add :owner, :integer
 
       timestamps()

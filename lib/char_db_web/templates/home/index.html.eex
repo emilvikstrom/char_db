@@ -1,0 +1,9 @@
+<%= if length(@characters) > 0 do %>
+    <%= for character <- @characters do %>
+        <%= character.name %>
+        <br>
+    <% end %>
+<% else %>
+    No characters
+<% end %>
+<br>

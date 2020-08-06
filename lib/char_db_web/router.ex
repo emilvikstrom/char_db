@@ -40,6 +40,11 @@ defmodule CharDbWeb.Router do
     get "/", UserController, :get
   end
 
+  scope "/home", CharDbWeb do
+    pipe_through [:browser, :authentication, :get_user]
+    get "/", HomeController, :get
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", CharDbWeb do
   #   pipe_through :api

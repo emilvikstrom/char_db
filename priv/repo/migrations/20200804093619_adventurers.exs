@@ -7,7 +7,9 @@ defmodule CharDb.Repo.Migrations.Adventurers do
       add :runes, :map
       add :attributes, :map
       add :skills, :map
+      add :passions, :map
       add :owner, :integer
+      add :homeland, :string
 
       timestamps()
     end

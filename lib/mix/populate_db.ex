@@ -2,7 +2,7 @@ defmodule Mix.Tasks.PopulateDb do
   ## TODO
   ## EVERYTHING
 
-  alias CharDb.Runequest.{Runes, Skills}
+  alias CharDb.Runequest.{Cultures, Runes, Skills}
 
   use Mix.Task
 
@@ -21,6 +21,7 @@ defmodule Mix.Tasks.PopulateDb do
 
     {:ok, skills} = get_json("priv/runequest/skills.json")
     {:ok, runes} = get_json("priv/runequest/runes.json")
+    {:ok, cultures} = get_json("priv/runequest/cultures.json")
 
     Enum.each(skills, fn skill_data ->
       Skills.create(skill_data)
@@ -28,6 +29,10 @@ defmodule Mix.Tasks.PopulateDb do
 
     Enum.each(runes, fn rune_data ->
       Runes.create(rune_data)
+    end)
+
+    Enum.each(cultures, fn culture_data ->
+      Cultures.create(culture_data)
     end)
   end
 

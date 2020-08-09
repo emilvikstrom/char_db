@@ -9,8 +9,10 @@ defmodule CharDb.Runequest.Adventurer do
     field(:owner, :id, null: false)
     field(:name, :string, null: false)
     field(:runes, :map, null: false)
+    field(:passions, :map, default: %{})
     field(:attributes, :map, null: false)
-    field(:skills, :map, default: [])
+    field(:skills, :map, default: %{})
+    field(:homeland, :string)
 
     timestamps()
   end
@@ -21,16 +23,21 @@ defmodule CharDb.Runequest.Adventurer do
     Repo.get_by(__MODULE__, %{id: id})
   end
 
-  def create(%{"name" => name}) do
+  def create(%{"name" => name, "homeland" => homeland}) do
     data = %{
       name: name,
+      homeland: homeland,
       runes: create_base_runes(),
       skills: create_base_skills(),
       attributes: create_base_attributes()
     }
 
-    cast(%__MODULE__{}, data, [:name, :runes, :skills, :attributes])
-    |> Repo.insert()
+    cast(%__MODULE__{}, data, [:name, :homeland, :runes, :skills, :attributes])
+  end
+
+  def save(%__MODULE__{} = adventurer) do
+    adventurer
+    |> Repo.insert!()
   end
 
   defp create_base_attributes do

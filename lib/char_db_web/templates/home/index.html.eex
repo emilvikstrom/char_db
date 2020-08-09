@@ -7,3 +7,4 @@
     No characters
 <% end %>
 <br>
+<input type="button" onclick="location.href='/character/create';" value="Create new character" />
